@@ -10,11 +10,11 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>basic-statistics</artifactId>
+
+    <artifactId>page-ranks</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>Basic Statistics</name>
-
+    <name>Page Ranks</name>
 
     <dependencies>
         <dependency>
@@ -26,4 +26,6 @@
             <artifactId>hadoop-common</artifactId>
         </dependency>
     </dependencies>
+
+    
 </project>
