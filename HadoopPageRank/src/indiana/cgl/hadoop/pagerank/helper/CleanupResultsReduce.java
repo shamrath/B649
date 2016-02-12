@@ -17,7 +17,7 @@ public class CleanupResultsReduce extends Reducer<LongWritable, Text, LongWritab
         Text value = values.iterator().next();
         prSum += Double.valueOf(value.toString());
         count++;
-        context.write(key, values.iterator().next());
+        context.write(key, value);
         if (count == numUrls) {
             System.out.println("Page Ranks sum :" + prSum);
         }
