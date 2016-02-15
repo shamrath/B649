@@ -32,8 +32,8 @@ public class PageRankMap extends Mapper<LongWritable, Text, LongWritable, Text> 
             double rankValuePerUrl = rrd.rankValue / (double) numUrls;
             for (int i = 0; i < numUrls; i++) {
                 context.write(new LongWritable(i), new Text(String.valueOf(rankValuePerUrl)));
-                sb.append("#");
             }
+            sb.append("#");
         } else {
                 /*Write your code here*/
             double rankValue = rrd.rankValue / ((double) rrd.targetUrlsList.size());
