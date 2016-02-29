@@ -64,6 +64,8 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import javax.xml.crypto.Data;
+
 /**
  * @author Thilina Gunarathne (tgunarat@cs.indiana.edu)
  * 
@@ -84,7 +86,14 @@ public class RunnerMap extends Mapper<String, String, IntWritable, Text> {
 		/** Write your code here
 		    get two absolute filepath for localDB and localBlastBinary
 		**/
-	}
+
+        Path program  = local[0];
+        localBlastProgram = program.toString();
+        localDB = localBlastProgram + File.separator + conf.get(DataAnalysis.DB_ARCHIVE) + File.separator
+                + conf.get(DataAnalysis.DB_NAME);
+        System.out.println("local Blast program : " + localBlastProgram);
+        System.out.println("local DB : " + localDB);
+    }
 	
 
 	public void map(String key, String value, Context context) throws IOException,
@@ -99,20 +108,18 @@ public class RunnerMap extends Mapper<String, String, IntWritable, Text> {
 		String cmdArgs = conf.get(DataAnalysis.PARAMETERS);
 		String outputDir = conf.get(DataAnalysis.OUTPUT_DIR);
 		String workingDir = conf.get(DataAnalysis.WORKING_DIR);
-		
-		
 
-		
 		System.out.println("the map key : " + key);
 		System.out.println("the value path : " + value.toString());
 		System.out.println("Local DB : " + this.localDB);
 
 		// We have the full file names in the value.
-                String localInputFile = "";
-                String outFile = "";
-                String stdOutFile = "";
-                String stdErrFile = "";
-		String fileNameOnly = "";
+        String fileName = value.substring(value.lastIndexOf('/') +1);
+        String localInputFile = workingDir + File.separator + fileName;
+        String outFile = workingDir + File.separator + fileName + ".out";
+        String stdOutFile = workingDir + File.separator + fileName + ".stdout";
+        String stdErrFile = workingDir + File.separator + fileName + ".stderr";
+        String fileNameOnly = fileName;
 
                 	/**
 				Write your code to get localInputFile, outFile,
